@@ -2,6 +2,7 @@ package auth
 
 import (
 	"encoding/binary"
+	"github.com/open-unlight/go-ul/logger"
 	"github.com/open-unlight/go-ul/protocol"
 )
 
@@ -36,6 +37,8 @@ func (c *Client) Decode(buffer []byte) protocol.Command {
 func (c *Client) AddCallback(cb protocol.Callback) int {
 	idx := len(c.callbacks)
 	c.callbacks = append(c.callbacks, cb)
+
+	logger.Debug("[Auth Client] Register Command #%d with arguments: %v", idx, cb.Arguments())
 
 	return idx
 }
